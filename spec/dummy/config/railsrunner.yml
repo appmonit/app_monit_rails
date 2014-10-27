@@ -1,0 +1,8 @@
+development:
+  client_id: 1a0afe3c4493e088dabe5913c2935fc8
+  collector_url: http://95.85.24.116
+  active: true
+test:
+  client_id: c5ca714f6f1ad06187d07c022877d314
+  collector_url: http://95.85.24.116
+  active: true

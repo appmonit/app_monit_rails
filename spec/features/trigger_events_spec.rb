@@ -35,8 +35,9 @@ feature 'Triggered events' do
       }.to raise_error
 
       @worker = AppMonit::Rails::Worker.instance
+      @worker.push(:flush)
     end
 
-    puts AppMonit::Rails::Worker.instance.requests.inspect
+    puts AppMonit::Rails::Worker.instance.events.inspect
   end
 end

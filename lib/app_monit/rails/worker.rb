@@ -98,8 +98,8 @@ module AppMonit
       def convert_requests_to_events
         @requests.flat_map do |minute, endpoints|
           endpoints.collect do |endpoint, durations|
-            payload = { endpoint: endpoint }.merge(durations.delete(:total) || {}).merge(durations)
-            { created_at: Time.at(minute), name: 'page_load', payload: payload }
+            payload = durations.merge(application: Config.name, endpoint: endpoint)
+            { application: Config.name, created_at: Time.at(minute), name: 'page_load', payload: payload }
           end
         end
       end
@@ -107,16 +107,18 @@ module AppMonit
       def convert_errors_to_events
         @errors.flat_map do |minute, endpoints|
           endpoints.collect do |endpoint, duration|
-            payload = duration.merge(endpoint: endpoint)
+            payload = duration.merge(application: Config.name, endpoint: endpoint)
             { created_at: Time.at(minute), name: 'page_error', payload: payload }
           end
         end
       end
 
+      def events
+        convert_requests_to_events + convert_errors_to_events
+      end
+
       def send_to_collector
         AppMonit::Rails.logger.debug "Sending to collector"
-
-        events = convert_requests_to_events + convert_errors_to_events
 
         if events.any?
           AppMonit::Http.post('/v1/events', event: events)

@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 feature 'Triggered events' do
-
   scenario 'User creates a new Post' do
-    AppMonit::Config.end_point = 'http://localhost:3000'
-    AppMonit::Config.api_key   = 'api_key'
-    AppMonit::Config.env       = 'test'
+    AppMonit::Config.end_point      = 'http://test.local'
+    AppMonit::Config.api_key        = 'api_key'
+    AppMonit::Config.env            = 'test'
 
     10.times do
       visit '/posts/'
@@ -37,9 +36,7 @@ feature 'Triggered events' do
 
       @worker = AppMonit::Rails::Worker.instance
     end
-    AppMonit::Rails::Worker.instance.push(:flush)
-    sleep 1.0
 
-    puts AppMonit::Rails::Worker.instance.requests.count
+    puts AppMonit::Rails::Worker.instance.requests.inspect
   end
 end

@@ -116,13 +116,14 @@ module AppMonit
       def send_to_collector
         AppMonit::Rails.logger.debug "Sending to collector"
 
-        events = convert_requests_to_events
-        errors = convert_errors_to_events
+        events = convert_requests_to_events + convert_errors_to_events
 
-        AppMonit::Http.post('/v1/events', event: (events + errors))
+        if events.any?
+          AppMonit::Http.post('/v1/events', event: events)
 
-        @requests.clear
-        @errors.clear
+          @requests.clear
+          @errors.clear
+        end
 
         reset
       end

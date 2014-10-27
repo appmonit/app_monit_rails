@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    app_monit_rails (0.0.1)
+    app_monit_rails (0.0.3)
       app_monit (>= 0.0.7)
 
 GEM

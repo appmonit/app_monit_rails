@@ -1,11 +1,11 @@
 module AppMonit
-  class Rails
+  module Rails
     class Config
       class << self
         attr_writer :enabled
 
         def enabled?
-          @enabled.nil? ? env != "test" : @enabled
+          @enabled.nil? ? ::Rails.env != "test" : @enabled
         end
       end
     end

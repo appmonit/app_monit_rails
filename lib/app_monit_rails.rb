@@ -4,6 +4,7 @@ module AppMonit
     Event = Struct.new(:minute, :endpoint, :durations)
     Error = Struct.new(:minute, :endpoint, :duration)
 
+    require 'app_monit/rails/config'
     require 'app_monit/rails/subscriber'
     require 'app_monit/rails/railtie'
     require 'app_monit/rails/worker'

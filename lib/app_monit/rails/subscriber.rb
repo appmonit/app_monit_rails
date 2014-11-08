@@ -13,6 +13,9 @@ module AppMonit
 
         payload  = event.payload
         endpoint = "#{payload[:controller]}##{payload[:action]}"
+
+        return if AppMonit::Rails::Config.skipped_endpoints.include?(endpoint)
+
         minute   = event.time.to_i - (event.time.to_i % 60)
 
         if payload[:exception]

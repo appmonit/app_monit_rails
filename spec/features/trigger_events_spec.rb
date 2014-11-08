@@ -5,6 +5,7 @@ feature 'Triggered events' do
     AppMonit::Config.end_point      = 'http://test.local'
     AppMonit::Config.api_key        = 'api_key'
     AppMonit::Config.env            = 'test'
+    AppMonit::Rails::Config.skipped_endpoints = %w(PostsController#skipped)
 
     10.times do
       visit '/posts/'
@@ -33,6 +34,8 @@ feature 'Triggered events' do
       expect {
         visit '/posts/with_exception'
       }.to raise_error
+
+      visit '/posts/skipped'
 
       @worker = AppMonit::Rails::Worker.instance
       @worker.push(:flush)

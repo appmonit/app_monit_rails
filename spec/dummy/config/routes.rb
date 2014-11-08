@@ -1,5 +1,8 @@
 Dummy::Application.routes.draw do
   resources :posts do
-    get :with_exception, on: :collection
+    collection do
+      get :with_exception
+      get :skipped
+    end
   end
 end

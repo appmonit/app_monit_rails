@@ -20,11 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "app_monit", ">= 0.0.7"
 
-  spec.add_development_dependency "bundler", ">= 1.5.0"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "minitest", ">= 5.2.2"
-  spec.add_development_dependency "minitest-reporters"
-  spec.add_development_dependency "webmock", ">= 1.17.1"
-  spec.add_development_dependency "rails", ">= 4.1"
-  spec.add_development_dependency "guard-minitest" if RUBY_PLATFORM =~ /darwin/
+  spec.add_development_dependency "webmock"
+  spec.add_development_dependency "rails"
 end

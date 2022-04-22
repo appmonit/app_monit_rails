@@ -9,7 +9,7 @@ module AppMonit
         end
 
         def name
-          module_parent_name = if Rails::VERSION::MAJOR >= 6
+          module_parent_name = if ::Rails::VERSION::MAJOR >= 6
                                  ::Rails.application.class.module_parent_name
                                else
                                  ::Rails.application.class.parent_name

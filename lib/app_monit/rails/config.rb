@@ -5,11 +5,17 @@ module AppMonit
         attr_writer :enabled, :name, :skipped_endpoints
 
         def enabled?
-          @enabled.nil? ? ::Rails.env != "test" : @enabled
+          @enabled.nil? ? ::Rails.env != 'test' : @enabled
         end
 
         def name
-          @name.nil? ? ::Rails.application.class.parent_name : @name
+          module_parent_name = if Rails::VERSION::MAJOR >= 6
+                                 ::Rails.application.class.module_parent_name
+                               else
+                                 ::Rails.application.class.parent_name
+                               end
+
+          @name.nil? ? module_parent_name : @name
         end
 
         def skipped_endpoints

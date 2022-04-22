@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   end
 
   def skipped
-    render text: 'skipped'
+    render plain: 'skipped'
   end
 
   private

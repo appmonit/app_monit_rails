@@ -29,11 +29,11 @@ feature 'Triggered events' do
 
       expect {
         visit '/not_found'
-      }.to raise_error
+      }.to raise_error(ActionController::RoutingError)
 
       expect {
         visit '/posts/with_exception'
-      }.to raise_error
+      }.to raise_error(RuntimeError)
 
       visit '/posts/skipped'
 
